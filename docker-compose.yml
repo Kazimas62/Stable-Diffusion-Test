@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+  main:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: stable_diffusion
+    tty: true
+    environment:
+      - DIFFUSION_TOKEN=ACCESS_TOKEN
+    volumes:
+      - ./images:/workspace/images
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
